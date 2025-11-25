@@ -6,7 +6,7 @@ var findErrorNums = function(nums) {
     var seen = new Array(nums.length).fill(0);
     var ans = new Array(2);
 
-    for (i = 0; i <= nums.length; i++) {
+    for (i = 0; i < nums.length; i++) {
         seen[nums[i] - 1] += 1;
     }
 
