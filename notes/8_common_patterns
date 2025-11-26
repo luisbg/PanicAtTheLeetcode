@@ -1,9 +1,14 @@
 8 common patterns:
 - Sliding Window
 - Subset
+-- Similar to BFS to generate permutations
 - Modified Binary Search
+-- Break work half of half of half
 - Top K Elements
+-- Heap
 - Binary Tree DFS
 - Topological Sort
+-- Directed acyclic graph
 - Binary Tree BFs
+-- Work with a queue
 - 2 Pointer
