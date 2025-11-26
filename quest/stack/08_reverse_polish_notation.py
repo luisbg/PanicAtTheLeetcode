@@ -1,7 +1,4 @@
 class Solution(object):
-    def is_operator(self, token):
-        return token == "+" or token == "-" or token == "*" or token == "/"
-
     def evalRPN(self, tokens):
         """
         :type tokens: List[str]
@@ -9,7 +6,7 @@ class Solution(object):
         """
         stack = []
         for t in tokens:
-            if not self.is_operator(t):
+            if t not in "+-*/":
                 stack.append(int(t))
             else:
                 b = stack.pop()
@@ -24,8 +21,7 @@ class Solution(object):
                 elif t == "/":
                     stack.append(int(float(a) / b)) # make sure we truncate toward zero
         
-        return stack.pop()
-
+        return stack[-1]
 
 # If you’re running this as Python 3, "/" case is simply: int(a / b),
 # because / gives you a float and int() truncates toward zero.
