@@ -20,3 +20,31 @@ class Solution(object):
                     break
         
         return ans
+
+    def monotonicStackDailyTemperatures(self, temperatures):
+        """
+        :type temperatures: List[int]
+        :rtype: List[int]
+        """
+        days = len(temperatures)
+        ans = [0] * days
+        stack = []
+
+        # walk from right to left
+        for i in range(days - 1, -1, -1):
+            count = 0
+            temp = temperatures[i]
+
+            # pop days not warmer than today
+            while stack and temperatures[stack[-1]] <= temp:
+                stack.pop()
+
+            # first warmer day is at the top of the stack
+            if stack:
+                ans[i] = stack[-1] - i
+            else:
+                ans[i] = 0
+
+            stack.append(i)
+
+        return ans
