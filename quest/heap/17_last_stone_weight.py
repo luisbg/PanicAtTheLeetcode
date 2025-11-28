@@ -19,20 +19,17 @@ class Solution(object):
         :type stones: List[int]
         :rtype: int
         """
-        maxHeap = []
-        for s in stones:
-            heapq.heappush(maxHeap, s * -1)
+        maxHeap = [-s for s in stones]
+        heapq.heapify(maxHeap) # O(n)
 
         while len(maxHeap) > 1:
-            y = heapq.heappop(maxHeap) * -1
-            x = heapq.heappop(maxHeap) * -1
+            y = -heapq.heappop(maxHeap)
+            x = -heapq.heappop(maxHeap)
 
-            if x == y:
-                continue
+            if x != y:
+                heapq.heappush(maxHeap, -(y - x))
 
-            heapq.heappush(maxHeap, (y - x) * - 1)
-
-        if len(maxHeap) == 1:
-            return heapq.heappop(maxHeap) * -1
+        if maxHeap:
+            return -heapq.heappop(maxHeap)
         else:
             return 0
