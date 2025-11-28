@@ -10,20 +10,14 @@ class Solution(object):
         :type digits: List[int]
         :rtype: List[int]
         """
-        done = False
+
         n = len(digits)
 
         for i in range(n - 1, -1, -1):
             if digits[i] < 9:
                 digits[i] += 1
-                done = True
-                break
-            else:
-                digits[i] = 0
+                return digits
 
-        if not done:
-            digits = [1]
-            for i in range(0, n):
-                digits.append(0)
+            digits[i] = 0
 
-        return digits
+        return [1] + [0] * n
