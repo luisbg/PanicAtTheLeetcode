@@ -13,7 +13,6 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-
         # Get string without dashes
         drop_dashes = []
         for c in s:
@@ -45,3 +44,29 @@ class Solution(object):
             ans.pop()
 
         return "".join(ans)
+
+    def licenseKeyFormatting(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: str
+        """
+        # Remove dashes and uppercase everything
+        clean = s.replace("-", "").upper()
+        n = len(clean)
+        if n == 0:
+            return ""
+
+        # Length of the first group
+        first_len = n % k or k
+
+        groups = []
+        # First group
+        groups.append(clean[:first_len])
+
+        # Subsequent groups of length k
+        for i in range(first_len, n, k):
+            groups.append(clean[i:i + k])
+
+        # Join with dashes
+        return "-".join(groups)
