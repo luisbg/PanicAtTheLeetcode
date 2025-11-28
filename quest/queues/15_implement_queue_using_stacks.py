@@ -67,3 +67,52 @@ class MyQueue(object):
         :rtype: bool
         """
         return not self.queue
+
+# Pushing from in to out stack only once per element, amortized O(1)
+class MyFasterQueue(object):
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        self.in_stack.append(x)
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        if self.out_stack:
+            return self.out_stack.pop()
+        else:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+
+            if self.out_stack:
+                return self.out_stack.pop()
+            else:
+                return 0
+
+    def peek(self):
+        """
+        :rtype: int
+        """
+        if self.out_stack:
+            return self.out_stack[-1]
+        else:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+
+            if self.out_stack:
+                return self.out_stack[-1]
+            else:
+                return 0
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        return not self.in_stack and not self.out_stack
