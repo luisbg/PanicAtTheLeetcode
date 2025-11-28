@@ -11,7 +11,8 @@ Return the time taken for the person initially at position k (0-indexed) to fini
 from collections import deque
 
 class Solution(object):
-    def timeRequiredToBuy(self, tickets, k):
+    # This solution is O(T) where T is sum(tickets)
+    def simulatedQTimeRequiredToBuy(self, tickets, k):
         """
         :type tickets: List[int]
         :type k: int
@@ -34,3 +35,21 @@ class Solution(object):
                 return seconds
 
         return -1
+
+    # This solution is O(n)
+    def timeRequiredToBuy(self, tickets, k):
+        """
+        :type tickets: List[int]
+        :type k: int
+        :rtype: int
+        """
+        tk = tickets[k]
+        total = 0
+
+        for i, t in enumerate(tickets):
+            if i <= k:
+                total += min(t, tk)
+            else:
+                total += min(t, tk - 1)
+
+        return total
