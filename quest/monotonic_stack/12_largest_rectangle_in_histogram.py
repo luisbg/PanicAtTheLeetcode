@@ -70,3 +70,31 @@ class Solution(object):
                 tallest = h
 
         return tallest
+
+    def onePassLargestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        stack = []          # will store indices
+        max_area = 0
+        n = len(heights)
+
+        # Add a sentinel bar of height 0 to flush the stack at the end
+        for i in range(n + 1):
+            # Current height: real height or 0 at the sentinel position
+            curr_height = heights[i] if i < n else 0
+
+            # While the current bar is lower than the bar at the top of the stack,
+            # we can compute areas for the taller bars.
+            while stack and curr_height < heights[stack[-1]]:
+                h = heights[stack.pop()]
+                # If stack is empty, it means h was the smallest so far,
+                # so it extends all the way to the left (0..i-1)
+                left_bound = stack[-1] if stack else -1
+                width = i - left_bound - 1
+                max_area = max(max_area, h * width)
+
+            stack.append(i)
+
+        return max_area
