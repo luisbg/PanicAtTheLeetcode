@@ -18,9 +18,9 @@ class Solution(object):
         """
 
         heap = []
-        for u in nums1:
-            for v in nums2:
-                heapq.heappush(heap, [u + v, u, v])
+        for u in range(min(k, len(nums1))):
+            for v in range(min(k, len(nums2))):
+                heapq.heappush(heap, (nums1[u] + nums2[v], nums1[u], nums2[v]))
 
         ans = []
         while len(ans) < k:
