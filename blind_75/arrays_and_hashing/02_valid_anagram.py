@@ -21,7 +21,7 @@ class Solution(object):
             else:
                 letters[l] = 1
 
-        # subtract letters in t
+        # subtract letters in t from dictionary
         for l in t:
             if l in letters:
                 letters[l] -= 1
