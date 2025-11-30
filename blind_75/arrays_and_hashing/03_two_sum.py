@@ -13,11 +13,27 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        # bruteforce
-        # run two two loops trying all permutations
-        for x, a in enumerate(nums):
-            for y, b in enumerate(nums):
-                if x != y and a + b == target:
-                    return [x, y]
+        # approach expects a sorted array
+        snums = []
+        for i, n in enumerate(nums):
+            snums.append([n, i])
+        snums.sort()
 
+        # until we find the target
+        # try beginning and end
+        a = 0
+        b = len(nums) - 1
+        while a < b:
+            s = snums[a][0] + snums[b][0]
+            # if sum is too big, reduce right
+            if s > target:
+                b -= 1
+            # if sum too small, increase left
+            elif s < target:
+                a += 1
+            # else we found the target
+            else:
+                return [snums[a][1], snums[b][1]]
+
+        # return empty array if we didn't find the target
         return []
