@@ -1,8 +1,11 @@
 """
 Given an array of strings strs, group the together. You can return the answer in any order.
 """
+
+from collections import defaultdict
+
 class Solution(object):
-    def groupAnagrams(self, strs):
+    def slowGroupAnagrams(self, strs):
         """
         :type strs: List[str]
         :rtype: List[List[str]]
@@ -39,3 +42,25 @@ class Solution(object):
                 ans.append(group)
 
         return ans
+
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        groups = defaultdict(list)
+
+        # for all words in strs
+        for s in strs:
+            # count letters
+            counts = [0] * 26
+            for ch in s:
+                counts[ord(ch) - ord('a')] += 1
+
+            # use count as dictionary key with original word as count
+            key = tuple(counts)
+
+            # append matching counts
+            groups[key].append(s)
+
+        return list(groups.values())
