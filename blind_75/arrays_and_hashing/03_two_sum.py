@@ -7,7 +7,7 @@ You can return the answer in any order.
 """
 
 class Solution(object):
-    def twoSum(self, nums, target):
+    def slowTwoSum(self, nums, target):
         """
         :type nums: List[int]
         :type target: int
@@ -36,4 +36,23 @@ class Solution(object):
                 return [snums[a][1], snums[b][1]]
 
         # return empty array if we didn't find the target
+        return []
+
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        values = {}  # value -> index
+
+        # for every value check if we have the needed int to sum to target
+        for i, n in enumerate(nums):
+            needed = target - n
+            if needed in values:
+                return [values[needed], i]
+
+            values[n] = i
+
+        # Problem guarantees exactly one solution, so we shouldn't get here
         return []
