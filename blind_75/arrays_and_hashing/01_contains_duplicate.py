@@ -14,3 +14,20 @@ class Solution(object):
                 return True
 
         return False
+
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        # store seen values in hashset
+        seen = set()
+
+        # check if value is already in set
+        for n in nums:
+            if n in seen:
+                return True
+            seen.add(n)
+
+        # if no clashes, no duplicates
+        return False
