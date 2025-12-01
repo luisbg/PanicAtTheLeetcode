@@ -16,26 +16,23 @@ class Solution(object):
         """
         # one stacks for (), {}, and []
         stack = []
+        pairs = {')': '(', ']': '[', '}': '{'}
 
         # run through the string
         for b in s:
             # when we see an open bracket we add to the related stack
-            if b == "(" or b == "[" or b == "{":
+            if b in "([{":
                 stack.append(b) 
 
             # when we see a close bracket we remove from the related stack
-            if b == ")" or b == "]" or b == "}":
+            elif b in ")]}":
                 # we should never try removing from an empty stack
                 if not stack:
                     return False
 
                 # bracket type removed should match
                 c = stack.pop()
-                if b == ")" and c != "(":
-                    return False
-                if b == "]" and c != "[":
-                    return False
-                if b == "}" and c != "{":
+                if pairs[b] != c:
                     return False
 
         # at the end all stacks should be empty
