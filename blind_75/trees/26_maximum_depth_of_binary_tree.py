@@ -23,3 +23,25 @@ class Solution(object):
         right_depth = self.maxDepth(root.right)
 
         return 1 + max(left_depth, right_depth)
+
+    def iterativeMaxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        if not root:
+            return 0
+
+        depth = 0
+        q = deque([root])
+
+        while q:
+            depth += 1
+            for _ in range(len(q)):
+                node = q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+
+        return depth
