@@ -30,3 +30,28 @@ class Solution(object):
             return False
 
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+    def iterativeIsSameTree(self, p, q):
+        """
+        :type p: Optional[TreeNode]
+        :type q: Optional[TreeNode]
+        :rtype: bool
+        """
+        queue = deque([(p, q)])
+
+        while queue:
+            n1, n2 = queue.popleft()
+
+            # Both None: these subtrees match at this position
+            if not n1 and not n2:
+                continue
+
+            # One is None or values differ: trees differ
+            if not n1 or not n2 or n1.val != n2.val:
+                return False
+
+            # Enqueue children pairs
+            queue.append((n1.left, n2.left))
+            queue.append((n1.right, n2.right))
+
+        return True
