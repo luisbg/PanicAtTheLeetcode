@@ -19,9 +19,7 @@ class Solution(object):
             return
 
         # flip left and right
-        tmp = root.left
-        root.left = root.right
-        root.right = tmp
+        root.left, root.right = root.right, root.left
 
         # recurse over every node
         self.invertTree(root.left)
