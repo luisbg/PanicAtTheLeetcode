@@ -21,10 +21,7 @@ class Solution(object):
         s = s.lower()
 
         # remove non alphanumeric characters
-        ns = []
-        for c in s:
-            if self.isAlphanumeric(c):
-                ns.append(c)
+        ns = [c.lower() for c in s if c.isalnum()]
 
         # run two pointers, one from beginning and one from end
         start = 0
