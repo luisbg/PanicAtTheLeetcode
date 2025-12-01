@@ -8,31 +8,19 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        stack = []
-
+        prev = None
         curr = head
-        # iterate over the list
+
+        # iterate through list
+        # switch [prev -> curr.next] [curr -> prev]
+        # curr.next becomes None (until next cycle)
         while curr:
-            # store values on LIFO stack
-            stack.append(curr.val)
-            curr = curr.next
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
 
-        # create new list from stack
-        new_head = None
-        curr = None
-        while stack:
-            node = ListNode()
-            node.val = stack.pop()
-            if curr:
-                curr.next = node
-
-            curr = node
-
-            if not new_head:
-                new_head = node
-
-        # return new head
-        return new_head
+        return prev
 
     def recursiveReverseList(self, head):
         """
