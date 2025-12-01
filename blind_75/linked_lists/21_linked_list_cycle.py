@@ -19,22 +19,18 @@ class Solution(object):
         :rtype: bool
         """
         # run linked list with two pointers
-        p1, p2 = head, head
+        slow, fast = head, head
 
-        while True:
-            # if we find an empty next there isn't a cycle
-            # p1 moves ahead by one
-            if p1:
-                p1 = p1.next
-            else:
-                return False
+        # if we find an empty next there isn't a cycle
+        while fast and fast.next:
+            # slow moves ahead by one
+            slow = slow.next
 
-            # p2 moves ahead by two
-            if p2 and p2.next:
-                p2 = p2.next.next
-            else:
-                return False
+            # fast moves ahead by two
+            fast = fast.next.next
 
-            # if p1 == p2 we have a cycle
-            if p1 == p2:
+            # if slow == fast we have a cycle
+            if slow == fast:
                 return True
+
+        return False
