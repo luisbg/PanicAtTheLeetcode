@@ -6,7 +6,7 @@ data structures, and algorithm patterns.
 Goals:
 - Stay sharp on interview-style problems
 - Practice Python fluency
-- Learn common patterns (stack, queue, DFS, BFS, DP, greedy, etc.)
+- Apply common patterns (stack, queue, DFS, BFS, DP, greedy, etc.)
 - Keep a personal archive of solved challenges
 
 Expect:
