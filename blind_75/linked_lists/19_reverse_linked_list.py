@@ -33,3 +33,21 @@ class Solution(object):
 
         # return new head
         return new_head
+
+    def recursiveReverseList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        # base case is head or next being null
+        if head is None or head.next is None:
+            return head
+
+        # Recursively reverse all nodes after head
+        new_head = self.reverseList(head.next)
+
+        # Make the next node point back to head
+        head.next.next = head
+        head.next = None  # cut original link
+
+        return new_head
