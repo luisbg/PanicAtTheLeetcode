@@ -18,39 +18,35 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        # current index of both lists
         curr1 = list1
         curr2 = list2
 
         head = None
         prev = None
-
-        # run through both lists
-        while curr1 or curr2:
+        # run through both lists while both have nodes
+        while curr1 and curr2:
             # make a new node
             new_curr = ListNode()
             if not head:
                 head = new_curr
 
-            # handle ends of lists
-            if not curr1:
-                new_curr.val = curr2.val
-                curr2 = curr2.next
-            elif not curr2:
+            # pick lowest current node
+            # set it at new node and move pointer
+            if curr1.val <= curr2.val:
                 new_curr.val = curr1.val
                 curr1 = curr1.next
             else:
-                # pick lowest current node
-                # set it at new node and move pointer
-                if curr1.val <= curr2.val:
-                    new_curr.val = curr1.val
-                    curr1 = curr1.next
-                else:
-                    new_curr.val = curr2.val
-                    curr2 = curr2.next
+                new_curr.val = curr2.val
+                curr2 = curr2.next
 
             if prev:
                 prev.next = new_curr
             prev = new_curr
+
+        # handle end of lists
+        if prev:
+            prev.next = curr1 if curr1 else curr2
+        else:
+            head = curr1 if curr1 else curr2
 
         return head
