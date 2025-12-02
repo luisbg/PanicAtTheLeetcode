@@ -36,3 +36,36 @@ class Solution(object):
             current = next_patterns
 
         return len(ans)
+
+    def recursiveWays(self, n):
+        # base
+        if n == 0:
+            return [[1]]
+
+        ans = []
+        # we can only get to step n, in two ways
+        # one step more from n - 1
+        # two step from n - 2
+
+        if n > 0:
+            one_step_ways = self.ways(n - 1)
+            for s in one_step_ways:
+                # add one step
+                s.append(1)
+                ans.append(s)
+        if n > 1:
+            two_step_ways = self.ways(n - 2)
+            for s in two_step_ways:
+                # add two step
+                s.append(2)
+                ans.append(s)
+
+        return ans
+
+    def recursiveClimbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+
+        return len(self.ways(n))
