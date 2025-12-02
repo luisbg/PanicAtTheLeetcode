@@ -69,3 +69,26 @@ class Solution(object):
         """
 
         return len(self.ways(n))
+
+    def ways(self, known, n):
+        # check memoized values
+        if n in known:
+            return known[n]
+
+        ans = 0
+        # we can only get to step n, in two ways
+        # one step more from n - 1
+        # two step from n - 2
+        ans = self.ways(known, n - 1) + self.ways(known, n - 2)
+        known[n] = ans
+
+        return ans
+
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # prefill base
+        known = {0: 0, 1: 1, 2: 2}
+        return self.ways(known, n)
