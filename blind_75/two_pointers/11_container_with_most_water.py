@@ -28,3 +28,28 @@ class Solution(object):
 
         # return largest seen
         return largest
+
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        # start two pointer: start and end
+        start = 0
+        end = len(height) - 1
+        largest = 0
+
+        # run pointers towards the center
+        while start < end:
+            # track largest container
+            container = (end - start) * min(height[start], height[end])
+            if container > largest:
+                largest = container
+
+            if height[start] < height[end]:
+                start += 1
+            else:
+                end -= 1
+
+        # return largest seen
+        return largest
