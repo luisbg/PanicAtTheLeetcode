@@ -59,3 +59,27 @@ class Solution(object):
                 longest = seq
 
         return longest
+
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # add all nums to a set to have O(1) checks
+        num_set = set(nums)
+
+        # from all starts count sequences
+        # count repeating sequences
+        longest = 0
+        for n in num_set:
+            if n - 1 not in num_set:
+                seq = 1
+                x = n
+                while x + 1 in num_set:
+                    x += 1
+                    seq += 1
+
+                if seq > longest:
+                    longest = seq
+
+        return longest
