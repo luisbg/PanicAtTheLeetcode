@@ -11,7 +11,7 @@ Output: [24,12,8,6]
 """
 
 class Solution(object):
-    def productExceptSelf(self, nums):
+    def heavyProductExceptSelf(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
@@ -42,5 +42,28 @@ class Solution(object):
                 ans[i] = ltr[i - 1]
             else:
                 ans[i] = ltr[i - 1] * rtl[i + 1]
+
+        return ans
+
+    # O(1) space complexity
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        ln = len(nums)
+        ans = [1] * ln
+
+        # First pass: prefix products (left to right)
+        prefix = 1
+        for i in range(ln):
+            ans[i] = prefix
+            prefix *= nums[i]
+
+        # Second pass: suffix products (right to left)
+        suffix = 1
+        for i in range(ln - 1, -1, -1):
+            ans[i] *= suffix
+            suffix *= nums[i]
 
         return ans
