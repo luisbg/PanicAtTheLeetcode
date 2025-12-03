@@ -34,3 +34,46 @@ class Solution(object):
                                 triplet_values.append(triplet_v)
 
         return triplet_values
+
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # add all nums into a set for quick checking
+        num_set = set(nums)
+        triplet_values = []
+
+        # add all values to a tuple list (value, index)
+        # and sort it
+        num_idx = []
+        for i, n in enumerate(nums):
+            num_idx.append((n, i))
+        num_idx.sort()
+
+        # set every num as target
+        for target in num_idx:
+            start = 0
+            end = len(nums) - 1
+
+            while start < end:
+                res = -num_idx[start][0] - num_idx[end][0]
+                if res == target[0]:
+                    if (target[1] != num_idx[start][1] and
+                        target[1] != num_idx[end][1]):
+                        # found one
+                        triplet_v = [target[0], num_idx[start][0], num_idx[end][0]]
+
+                        # avoid duplicate triplets
+                        triplet_v.sort()
+                        if triplet_v not in triplet_values:
+                            triplet_values.append(triplet_v)
+
+                    start += 1
+                    end -= 1
+                elif res > target[0]:
+                    start += 1
+                else:
+                    end -= 1
+
+        return triplet_values
