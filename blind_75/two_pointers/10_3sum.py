@@ -77,3 +77,43 @@ class Solution(object):
                     end -= 1
 
         return triplet_values
+
+    def cleanerThreeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        n = len(nums)
+        res = []
+
+        for i in range(n):
+            # If this is the same as the previous value, skip to avoid duplicate triplets
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            target = -nums[i]
+            left, right = i + 1, n - 1
+
+            while left < right:
+                s = nums[left] + nums[right]
+
+                if s == target:
+                    res.append([nums[i], nums[left], nums[right]])
+
+                    # Skip duplicates on the left
+                    left_val = nums[left]
+                    while left < right and nums[left] == left_val:
+                        left += 1
+
+                    # Skip duplicates on the right
+                    right_val = nums[right]
+                    while left < right and nums[right] == right_val:
+                        right -= 1
+
+                elif s < target:
+                    left += 1
+                else:
+                    right -= 1
+
+        return res
