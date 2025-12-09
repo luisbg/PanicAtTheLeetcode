@@ -21,23 +21,18 @@ class Solution(object):
 
         # run through every list until all are empty
         while True:
-            # check for all lists being empty
-            done = True
-            for head in lists:
-                if head:
-                    done = False
-
-            if done:
-                break
-
-            smallest = 10001
+            smallest = None
             s_idx = -1
+
             # check all heads to find the smallest one
             for i, head in enumerate(lists):
-                if head and head.val:
-                    if head.val < smallest:
-                        smallest = head.val
-                        s_idx = i
+                if head and (smallest is None or head.val < smallest):
+                    smallest = head.val
+                    s_idx = i
+
+            # if we didn' find a non-empty list, we are done
+            if s_idx == -1:
+                break
 
             # copy smallest head to answer
             new_node = ListNode(smallest)
