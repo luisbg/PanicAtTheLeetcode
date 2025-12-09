@@ -22,11 +22,14 @@ class FirstUnique(object):
         """
         :rtype: int
         """
-        for n in self.nums:
-            if self.counts[n] == 1:
-                return n
+        # remove non-unique elements from the front
+        while self.nums and self.counts[self.nums[0]] == 2:
+            self.nums.popleft()
 
-        return -1
+        if self.nums:
+            return self.nums[0]
+        else:
+            return -1
 
     def add(self, value):
         """
@@ -34,7 +37,7 @@ class FirstUnique(object):
         :rtype: None
         """
         if value in self.counts:
-            self.counts[value] += 1
+            self.counts[value] = 2
         else:
             self.nums.append(value)
             self.counts[value] = 1
