@@ -21,21 +21,13 @@ class HitCounter(object):
         # append latest hit
         self.hits.append(timestamp)
 
-        # remove oldest hits if they are too old
-        while self.hits and self.hits[0] <= timestamp - 300:
-            self.hits.popleft()
-
     def getHits(self, timestamp):
         """
         :type timestamp: int
         :rtype: int
         """
-        # start a counter
-        count = 0
+        # remove oldest hits if they are too old
+        while self.hits and self.hits[0] <= timestamp - 300:
+            self.hits.popleft()
 
-        # count hits
-        for h in self.hits:
-            if h <= timestamp and h > timestamp - 300:
-                count += 1
-
-        return count
+        return len(self.hits)
