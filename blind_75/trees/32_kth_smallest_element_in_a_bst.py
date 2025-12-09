@@ -15,10 +15,11 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        inorder = []
+        seen = 0
         stack = []
         curr = root
 
+        # traverse in order
         while curr or stack:
             # go left as far as possible
             while curr:
@@ -26,11 +27,12 @@ class Solution(object):
                 curr = curr.left
 
             curr = stack.pop()
-            inorder.append(curr.val)
-            if len(inorder) == k:
-                break
+            seen += 1
+            if seen == k:
+                return curr.val
 
             # go right
             curr = curr.right
 
-        return inorder[k - 1]
+        # just in case
+        return -1
