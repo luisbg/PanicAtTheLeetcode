@@ -30,8 +30,4 @@ class Solution(object):
             skip = dp[i - 1]
             dp[i] = max(rob, skip)
 
-        max_cash = 0
-        for c in dp:
-            max_cash = max(max_cash, c)
-
-        return max_cash
+        return dp[-1]
